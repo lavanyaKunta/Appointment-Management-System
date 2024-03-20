@@ -44,14 +44,14 @@ public class AppointmentService implements appointmentInterface {
 
         }
         Doctor doctor=appointment.getDoctor();
-        Optional<Doctor> doctor1=doctorRepo.findById(doctorId);
-        System.out.println("-------------"+doctor1.get().getAppointmentFee());
+        // Optional<Doctor> doctor1=doctorRepo.findById(doctorId);
+        // System.out.println("-------------"+doctor1.get().getAppointmentFee());
         if(doctorSchedule.getStatus()==ScheduleStatus.UNBOOKED) {
             doctorSchedule.setStatus(ScheduleStatus.BOOKED);
             doctorScheduleRepo.save(doctorSchedule);
             appointment.setStartDateTime(doctorSchedule.getStartDateTime());
             appointment.setEndDateTime(doctorSchedule.getEndDateTime());
-            appointment.setPayment(doctor1.get().getAppointmentFee());
+            appointment.setPayment(doctor.getAppointmentFee());
 
             appointmentRepo.save(appointment);
             return null;
